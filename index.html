@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airline Reservation System - Project Guide</title>
+    <link rel="shortcut icon" href="https://codewithmuaaz.online/Favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f1d7c5 0%, #130324 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            color: #667eea;
+        }
+
+        .tab-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .tab-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .content-section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            animation: fadeIn 0.5s;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #764ba2;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card h4 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .concept-box {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .concept-box h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+
+        .code-example code {
+            color: #66d9ef;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        .info-box {
+            background: #e8f4fd;
+            border: 2px solid #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 style="color: red;">Muhammad Muaaz ALi</h1>
+            <h1>Developer for a reason</h1>
+            <h1>✈️ Airline Reservation Management System</h1>
+            <p class="subtitle">Comprehensive C++ Project Guide | CLO-1, 2, 3 & 4</p>
+        </header>
+
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+            <button class="tab-btn" onclick="showTab('features')">Features</button>
+            <button class="tab-btn" onclick="showTab('concepts')">C++ Concepts</button>
+            <button class="tab-btn" onclick="showTab('implementation')">Implementation</button>
+            <button class="tab-btn" onclick="showTab('code')">Code Examples</button>
+        </div>
+
+        <div id="overview" class="content-section active">
+            <h2>📋 Project Overview</h2>
+            <p>This project involves creating a complete airline reservation management system in C++ with dual interfaces for passengers and administrators.</p>
+            
+            <div class="info-box">
+                <h3>🎯 Main Objectives</h3>
+                <ul>
+                    <li><strong>Passenger Management:</strong> Allow passengers to book, cancel, and view flights</li>
+                    <li><strong>Admin Control:</strong> Enable admins to manage flights, passengers, and generate reports</li>
+                    <li><strong>Data Persistence:</strong> Store all data in text files for permanent storage</li>
+                    <li><strong>User Authentication:</strong> Implement secure login system for both user types</li>
+                </ul>
+            </div>
+
+            <h3>🏗️ System Architecture</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>👤 Passenger Side</h4>
+                    <ul>
+                        <li>Login with credentials</li>
+                        <li>Browse available flights</li>
+                        <li>Book flights with seat selection</li>
+                        <li>Cancel reservations</li>
+                        <li>View booking history</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h4>👨‍💼 Admin Side</h4>
+                    <ul>
+                        <li>Secure admin login</li>
+                        <li>Add/remove flights</li>
+                        <li>Manage passenger accounts</li>
+                        <li>Generate comprehensive reports</li>
+                        <li>View system statistics</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="features" class="content-section">
+            <h2>✨ Detailed Features</h2>
+            
+            <h3>🧳 Passenger Features</h3>
+            <div class="concept-box">
+                <h4>1. Flight Booking</h4>
+                <p>Passengers can:</p>
+                <ul>
+                    <li>Select from available flights</li>
+                    <li>Choose specific seats (Economy/Business/First Class)</li>
+                    <li>Specify departure and arrival dates/times</li>
+                    <li>Get fare calculated based on distance and class</li>
+                    <li>Receive a booking receipt with confirmation</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>2. Reservation Cancellation</h4>
+                <p>Features include:</p>
+                <ul>
+                    <li>Cancel existing bookings</li>
+                    <li>Automatic refund calculation</li>
+                    <li>Seat availability update</li>
+                    <li>Transaction history recording</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>3. Flight Viewing</h4>
+                <p>Display information:</p>
+                <ul>
+                    <li>All available flights</li>
+                    <li>Destination details</li>
+                    <li>Departure/arrival times</li>
+                    <li>Available seats</li>
+                    <li>Fare information</li>
+                </ul>
+            </div>
+
+            <h3>⚙️ Admin Features</h3>
+            <div class="concept-box">
+                <h4>1. Flight Management</h4>
+                <ul>
+                    <li>Add new flights with complete details</li>
+                    <li>Remove flights from system</li>
+                    <li>Update flight information</li>
+                    <li>Set flight status (available/full/maintenance)</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>2. Passenger Management</h4>
+                <ul>
+                    <li>Register new passengers</li>
+                    <li>Remove passenger accounts</li>
+                    <li>Update passenger inf<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airline Reservation System - Project Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f1d7c5 0%, #130324 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            color: #667eea;
+        }
+
+        .tab-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .tab-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .content-section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            animation: fadeIn 0.5s;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #764ba2;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card h4 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .concept-box {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .concept-box h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .code-example {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+
+        .code-example code {
+            color: #66d9ef;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            padding: 3px 8px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        .info-box {
+            background: #e8f4fd;
+            border: 2px solid #667eea;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 style="color: red;">Muhammad Muaaz ALi</h1>
+            <h1>Developer for a reason</h1>
+            <h1>✈️ Airline Reservation Management System</h1>
+            <p class="subtitle">Comprehensive C++ Project Guide | CLO-1, 2, 3 & 4</p>
+        </header>
+
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+            <button class="tab-btn" onclick="showTab('features')">Features</button>
+            <button class="tab-btn" onclick="showTab('concepts')">C++ Concepts</button>
+            <button class="tab-btn" onclick="showTab('implementation')">Implementation</button>
+            <button class="tab-btn" onclick="showTab('code')">Code Examples</button>
+        </div>
+
+        <div id="overview" class="content-section active">
+            <h2>📋 Project Overview</h2>
+            <p>This project involves creating a complete airline reservation management system in C++ with dual interfaces for passengers and administrators.</p>
+            
+            <div class="info-box">
+                <h3>🎯 Main Objectives</h3>
+                <ul>
+                    <li><strong>Passenger Management:</strong> Allow passengers to book, cancel, and view flights</li>
+                    <li><strong>Admin Control:</strong> Enable admins to manage flights, passengers, and generate reports</li>
+                    <li><strong>Data Persistence:</strong> Store all data in text files for permanent storage</li>
+                    <li><strong>User Authentication:</strong> Implement secure login system for both user types</li>
+                </ul>
+            </div>
+
+            <h3>🏗️ System Architecture</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>👤 Passenger Side</h4>
+                    <ul>
+                        <li>Login with credentials</li>
+                        <li>Browse available flights</li>
+                        <li>Book flights with seat selection</li>
+                        <li>Cancel reservations</li>
+                        <li>View booking history</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h4>👨‍💼 Admin Side</h4>
+                    <ul>
+                        <li>Secure admin login</li>
+                        <li>Add/remove flights</li>
+                        <li>Manage passenger accounts</li>
+                        <li>Generate comprehensive reports</li>
+                        <li>View system statistics</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="features" class="content-section">
+            <h2>✨ Detailed Features</h2>
+            
+            <h3>🧳 Passenger Features</h3>
+            <div class="concept-box">
+                <h4>1. Flight Booking</h4>
+                <p>Passengers can:</p>
+                <ul>
+                    <li>Select from available flights</li>
+                    <li>Choose specific seats (Economy/Business/First Class)</li>
+                    <li>Specify departure and arrival dates/times</li>
+                    <li>Get fare calculated based on distance and class</li>
+                    <li>Receive a booking receipt with confirmation</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>2. Reservation Cancellation</h4>
+                <p>Features include:</p>
+                <ul>
+                    <li>Cancel existing bookings</li>
+                    <li>Automatic refund calculation</li>
+                    <li>Seat availability update</li>
+                    <li>Transaction history recording</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>3. Flight Viewing</h4>
+                <p>Display information:</p>
+                <ul>
+                    <li>All available flights</li>
+                    <li>Destination details</li>
+                    <li>Departure/arrival times</li>
+                    <li>Available seats</li>
+                    <li>Fare information</li>
+                </ul>
+            </div>
+
+            <h3>⚙️ Admin Features</h3>
+            <div class="concept-box">
+                <h4>1. Flight Management</h4>
+                <ul>
+                    <li>Add new flights with complete details</li>
+                    <li>Remove flights from system</li>
+                    <li>Update flight information</li>
+                    <li>Set flight status (available/full/maintenance)</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>2. Passenger Management</h4>
+                <ul>
+                    <li>Register new passengers</li>
+                    <li>Remove passenger accounts</li>
+                    <li>Update passenger information (address, phone, preferences)</li>
+                    <li>View all passenger records</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>3. Comprehensive Reports</h4>
+                <ul>
+                    <li><span class="highlight">Passenger Report:</span> All transactions and spending</li>
+                    <li><span class="highlight">Flight Inventory Report:</span> Booking statistics and income</li>
+                    <li><span class="highlight">Inventory Status Report:</span> Current flight availability</li>
+                    <li><span class="highlight">Delay/Maintenance Report:</span> Track flight issues</li>
+                    <li><span class="highlight">Utilization Report:</span> Analyze booking rates</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="concepts" class="content-section">
+            <h2>💻 C++ Concepts Used</h2>
+
+            <div class="concept-box">
+                <h4>1. Functions</h4>
+                <p>Modular design with dedicated functions for each operation:</p>
+                <ul>
+                    <li><pre>bookFlight()</pre> - Handle flight bookings</li>
+                    <li><pre>cancelReservation()</pre> - Process cancellations</li>
+                    <li><pre>displayFlights()</pre> - Show available flights</li>
+                    <li><pre>generateReport()</pre> - Create various reports</li>
+                    <li><pre>authenticateUser()</pre> - User login validation</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>2. Arrays</h4>
+                <p>Used for storing multiple data elements:</p>
+                <ul>
+                    <li>Flight inventory arrays</li>
+                    <li>Seat maps for each flight</li>
+                    <li>Passenger records</li>
+                    <li>Booking history arrays</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>3. Loops</h4>
+                <p>Iteration through data:</p>
+                <ul>
+                    <li><pre>for</pre> loops - Display flight lists, iterate through arrays</li>
+                    <li><pre>while</pre> loops - Menu systems, user input validation</li>
+                    <li><pre>do-while</pre> loops - Ensure at least one execution (login attempts)</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>4. File Handling</h4>
+                <p>Persistent data storage:</p>
+                <ul>
+                    <li><pre>ofstream</pre> - Write flight and booking data</li>
+                    <li><pre>ifstream</pre> - Read stored information</li>
+                    <li><pre>fstream</pre> - Read and write operations</li>
+                    <li>Text files for: flights.txt, passengers.txt, bookings.txt</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>5. Structures</h4>
+                <p>Organize related data:</p>
+                <ul>
+                    <li><pre>struct Passenger</pre> - ID, name, contact, bookings</li>
+                    <li><pre>struct Flight</pre> - Number, destination, times, seats, fare</li>
+                    <li><pre>struct Admin</pre> - Admin credentials and permissions</li>
+                    <li><pre>struct Booking</pre> - Passenger ID, flight number, date, seat</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>6. Pointers & Dynamic Memory</h4>
+                <p>Efficient memory management:</p>
+                <ul>
+                    <li>Dynamic arrays using <pre>new</pre> and <pre>delete</pre></li>
+                    <li>Pointer-based passenger list management</li>
+                    <li>Variable-sized data structures</li>
+                    <li>Memory allocation for flight routes and seat arrays</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>7. Input/Output Operations</h4>
+                <ul>
+                    <li><pre>cin</pre> - User input for credentials and selections</li>
+                    <li><pre>cout</pre> - Display menus, receipts, and reports</li>
+                    <li>Formatted output for tables and reports</li>
+                    <li>Input validation and error handling</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>8. Logic Building</h4>
+                <ul>
+                    <li>Conditional statements for seat availability checks</li>
+                    <li>Fare calculation based on distance and class</li>
+                    <li>Date validation for bookings</li>
+                    <li>Error handling for invalid inputs</li>
+                    <li>Access control based on user type</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>9. Menu-Based Interface</h4>
+                <ul>
+                    <li><pre>switch-case</pre> statements for menu navigation</li>
+                    <li>Nested menus for different user types</li>
+                    <li>Loop-based menu systems</li>
+                    <li>Clear and intuitive user experience</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="implementation" class="content-section">
+            <h2>🔧 Implementation Strategy</h2>
+
+            <h3>Phase 1: Planning & Design</h3>
+            <div class="info-box">
+                <ul>
+                    <li>Design data structures (Passenger, Flight, Booking)</li>
+                    <li>Plan file format for data storage</li>
+                    <li>Create flowcharts for main functions</li>
+                    <li>Define menu hierarchy</li>
+                </ul>
+            </div>
+
+            <h3>Phase 2: Core Functionality</h3>
+            <div class="info-box">
+                <ol>
+                    <li><strong>Create structures:</strong> Define all necessary structs</li>
+                    <li><strong>Implement file I/O:</strong> Functions to save/load data</li>
+                    <li><strong>Build authentication:</strong> Login system for both user types</li>
+                    <li><strong>Develop booking system:</strong> Core reservation functionality</li>
+                </ol>
+            </div>
+
+            <h3>Phase 3: Advanced Features</h3>
+            <div class="info-box">
+                <ol>
+                    <li><strong>Fare calculation:</strong> Based on distance and class</li>
+                    <li><strong>Seat management:</strong> Track and update availability</li>
+                    <li><strong>Cancellation logic:</strong> Refund calculation</li>
+                    <li><strong>Report generation:</strong> Multiple report types</li>
+                </ol>
+            </div>
+
+            <h3>Phase 4: Testing & Refinement</h3>
+            <div class="warning-box">
+                <h4>⚠️ Important Testing Points</h4>
+                <ul>
+                    <li>Test with multiple users simultaneously</li>
+                    <li>Verify file operations work correctly</li>
+                    <li>Check for memory leaks in dynamic allocation</li>
+                    <li>Validate all user inputs</li>
+                    <li>Test edge cases (full flights, invalid dates, etc.)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="code" class="content-section">
+            <h2>📝 Code Examples</h2>
+
+            <h3>Structure Definitions</h3>
+            <div class="code-example">
+<pre>struct Passenger {
+    int id;
+    char name[50];
+    char phone[15];
+    char email[50];
+    bool isBooked;
+};
+
+struct Flight {
+    int flightNumber;
+    char destination[50];
+    char departureTime[20];
+    char arrivalTime[20];
+    int totalSeats;
+    int availableSeats;
+    float fare;
+    char status[20]; // "available", "full", "maintenance"
+};
+
+struct Booking {
+    int bookingId;
+    int passengerId;
+    int flightNumber;
+    char seatNumber[5];
+    char bookingDate[15];
+    float amountPaid;
+};</pre>
+            </div>
+
+            <h3>Function Prototypes</h3>
+            <div class="code-example">
+<pre>// Passenger Functions
+void passengerLogin();
+void bookFlight(Passenger* p);
+void cancelReservation(Passenger* p);
+void viewAvailableFlights();
+void generatePassengerReport(int passengerId);
+
+// Admin Functions
+void adminLogin();
+void addFlight();
+void removeFlight();
+void addPassenger();
+void removePassenger();
+void updatePassengerData();
+void generateAllReports();
+
+// Utility Functions
+void saveToFile();
+void loadFromFile();
+float calculateFare(int distance, char* class);
+bool checkSeatAvailability(int flightNum);</pre>
+            </div>
+
+            <h3>File Handling Example</h3>
+            <div class="code-example">
+<pre>void saveFlightData(Flight flights[], int count) {
+    ofstream file("flights.txt");
+    
+    for(int i = 0; i < count; i++) {
+        file << flights[i].flightNumber << " "
+             << flights[i].destination << " "
+             << flights[i].departureTime << " "
+             << flights[i].arrivalTime << " "
+             << flights[i].totalSeats << " "
+             << flights[i].availableSeats << " "
+             << flights[i].fare << " "
+             << flights[i].status << endl;
+    }
+    
+    file.close();
+}
+
+void loadFlightData(Flight flights[], int& count) {
+    ifstream file("flights.txt");
+    count = 0;
+    
+    while(file >> flights[count].flightNumber 
+               >> flights[count].destination
+               >> flights[count].departureTime
+               >> flights[count].arrivalTime
+               >> flights[count].totalSeats
+               >> flights[count].availableSeats
+               >> flights[count].fare
+               >> flights[count].status) {
+        count++;
+    }
+    
+    file.close();
+}</code>
+            </div>
+
+            <h3>Dynamic Memory Example</h3>
+            <div class="code-example">
+<pre>// Dynamic array for passengers
+int maxPassengers = 100;
+Passenger* passengers = new Passenger[maxPassengers];
+
+// Adding more passengers dynamically
+if(currentCount >= maxPassengers) {
+    maxPassengers *= 2;
+    Passenger* temp = new Passenger[maxPassengers];
+    
+    for(int i = 0; i < currentCount; i++) {
+        temp[i] = passengers[i];
+    }
+    
+    delete[] passengers;
+    passengers = temp;
+}
+
+// Don't forget to free memory
+delete[] passengers;</code>
+            </div>
+
+            <h3>Menu System Example</h3>
+            <div class="code-example">
+<pre>void passengerMenu(Passenger* p) {
+    int choice;
+    
+    do {
+        cout << "\n=== PASSENGER MENU ===" << endl;
+        cout << "1. View Available Flights" << endl;
+        cout << "2. Book a Flight" << endl;
+        cout << "3. Cancel Reservation" << endl;
+        cout << "4. View My Bookings" << endl;
+        cout << "5. Logout" << endl;
+        cout << "Enter choice: ";
+        cin >> choice;
+        
+        switch(choice) {
+            case 1:
+                viewAvailableFlights();
+                break;
+            case 2:
+                bookFlight(p);
+                break;
+            case 3:
+                cancelReservation(p);
+                break;
+            case 4:
+                generatePassengerReport(p->id);
+                break;
+            case 5:
+                cout << "Logging out..." << endl;
+                break;
+            default:
+                cout << "Invalid choice!" << endl;
+        }
+    } while(choice != 5);
+}</code>
+            </div>
+        </div>
+
+        <footer>
+            <p>💡 <strong>Pro Tip:</strong> Start with basic functionality and gradually add features. Test each component thoroughly before moving to the next!</p>
+            <p style="margin-top: 10px;">Good luck with your project! ✈️🚀</p>
+        </footer>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(tabId).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>ormation (address, phone, preferences)</li>
+                    <li>View all passenger records</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>3. Comprehensive Reports</h4>
+                <ul>
+                    <li><span class="highlight">Passenger Report:</span> All transactions and spending</li>
+                    <li><span class="highlight">Flight Inventory Report:</span> Booking statistics and income</li>
+                    <li><span class="highlight">Inventory Status Report:</span> Current flight availability</li>
+                    <li><span class="highlight">Delay/Maintenance Report:</span> Track flight issues</li>
+                    <li><span class="highlight">Utilization Report:</span> Analyze booking rates</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="concepts" class="content-section">
+            <h2>💻 C++ Concepts Used</h2>
+
+            <div class="concept-box">
+                <h4>1. Functions</h4>
+                <p>Modular design with dedicated functions for each operation:</p>
+                <ul>
+                    <li><pre>bookFlight()</pre> - Handle flight bookings</li>
+                    <li><pre>cancelReservation()</pre> - Process cancellations</li>
+                    <li><pre>displayFlights()</pre> - Show available flights</li>
+                    <li><pre>generateReport()</pre> - Create various reports</li>
+                    <li><pre>authenticateUser()</pre> - User login validation</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>2. Arrays</h4>
+                <p>Used for storing multiple data elements:</p>
+                <ul>
+                    <li>Flight inventory arrays</li>
+                    <li>Seat maps for each flight</li>
+                    <li>Passenger records</li>
+                    <li>Booking history arrays</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>3. Loops</h4>
+                <p>Iteration through data:</p>
+                <ul>
+                    <li><pre>for</pre> loops - Display flight lists, iterate through arrays</li>
+                    <li><pre>while</pre> loops - Menu systems, user input validation</li>
+                    <li><pre>do-while</pre> loops - Ensure at least one execution (login attempts)</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>4. File Handling</h4>
+                <p>Persistent data storage:</p>
+                <ul>
+                    <li><pre>ofstream</pre> - Write flight and booking data</li>
+                    <li><pre>ifstream</pre> - Read stored information</li>
+                    <li><pre>fstream</pre> - Read and write operations</li>
+                    <li>Text files for: flights.txt, passengers.txt, bookings.txt</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>5. Structures</h4>
+                <p>Organize related data:</p>
+                <ul>
+                    <li><pre>struct Passenger</pre> - ID, name, contact, bookings</li>
+                    <li><pre>struct Flight</pre> - Number, destination, times, seats, fare</li>
+                    <li><pre>struct Admin</pre> - Admin credentials and permissions</li>
+                    <li><pre>struct Booking</pre> - Passenger ID, flight number, date, seat</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>6. Pointers & Dynamic Memory</h4>
+                <p>Efficient memory management:</p>
+                <ul>
+                    <li>Dynamic arrays using <pre>new</pre> and <pre>delete</pre></li>
+                    <li>Pointer-based passenger list management</li>
+                    <li>Variable-sized data structures</li>
+                    <li>Memory allocation for flight routes and seat arrays</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>7. Input/Output Operations</h4>
+                <ul>
+                    <li><pre>cin</pre> - User input for credentials and selections</li>
+                    <li><pre>cout</pre> - Display menus, receipts, and reports</li>
+                    <li>Formatted output for tables and reports</li>
+                    <li>Input validation and error handling</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>8. Logic Building</h4>
+                <ul>
+                    <li>Conditional statements for seat availability checks</li>
+                    <li>Fare calculation based on distance and class</li>
+                    <li>Date validation for bookings</li>
+                    <li>Error handling for invalid inputs</li>
+                    <li>Access control based on user type</li>
+                </ul>
+            </div>
+
+            <div class="concept-box">
+                <h4>9. Menu-Based Interface</h4>
+                <ul>
+                    <li><pre>switch-case</pre> statements for menu navigation</li>
+                    <li>Nested menus for different user types</li>
+                    <li>Loop-based menu systems</li>
+                    <li>Clear and intuitive user experience</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="implementation" class="content-section">
+            <h2>🔧 Implementation Strategy</h2>
+
+            <h3>Phase 1: Planning & Design</h3>
+            <div class="info-box">
+                <ul>
+                    <li>Design data structures (Passenger, Flight, Booking)</li>
+                    <li>Plan file format for data storage</li>
+                    <li>Create flowcharts for main functions</li>
+                    <li>Define menu hierarchy</li>
+                </ul>
+            </div>
+
+            <h3>Phase 2: Core Functionality</h3>
+            <div class="info-box">
+                <ol>
+                    <li><strong>Create structures:</strong> Define all necessary structs</li>
+                    <li><strong>Implement file I/O:</strong> Functions to save/load data</li>
+                    <li><strong>Build authentication:</strong> Login system for both user types</li>
+                    <li><strong>Develop booking system:</strong> Core reservation functionality</li>
+                </ol>
+            </div>
+
+            <h3>Phase 3: Advanced Features</h3>
+            <div class="info-box">
+                <ol>
+                    <li><strong>Fare calculation:</strong> Based on distance and class</li>
+                    <li><strong>Seat management:</strong> Track and update availability</li>
+                    <li><strong>Cancellation logic:</strong> Refund calculation</li>
+                    <li><strong>Report generation:</strong> Multiple report types</li>
+                </ol>
+            </div>
+
+            <h3>Phase 4: Testing & Refinement</h3>
+            <div class="warning-box">
+                <h4>⚠️ Important Testing Points</h4>
+                <ul>
+                    <li>Test with multiple users simultaneously</li>
+                    <li>Verify file operations work correctly</li>
+                    <li>Check for memory leaks in dynamic allocation</li>
+                    <li>Validate all user inputs</li>
+                    <li>Test edge cases (full flights, invalid dates, etc.)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="code" class="content-section">
+            <h2>📝 Code Examples</h2>
+
+            <h3>Structure Definitions</h3>
+            <div class="code-example">
+<pre>struct Passenger {
+    int id;
+    char name[50];
+    char phone[15];
+    char email[50];
+    bool isBooked;
+};
+
+struct Flight {
+    int flightNumber;
+    char destination[50];
+    char departureTime[20];
+    char arrivalTime[20];
+    int totalSeats;
+    int availableSeats;
+    float fare;
+    char status[20]; // "available", "full", "maintenance"
+};
+
+struct Booking {
+    int bookingId;
+    int passengerId;
+    int flightNumber;
+    char seatNumber[5];
+    char bookingDate[15];
+    float amountPaid;
+};</pre>
+            </div>
+
+            <h3>Function Prototypes</h3>
+            <div class="code-example">
+<pre>// Passenger Functions
+void passengerLogin();
+void bookFlight(Passenger* p);
+void cancelReservation(Passenger* p);
+void viewAvailableFlights();
+void generatePassengerReport(int passengerId);
+
+// Admin Functions
+void adminLogin();
+void addFlight();
+void removeFlight();
+void addPassenger();
+void removePassenger();
+void updatePassengerData();
+void generateAllReports();
+
+// Utility Functions
+void saveToFile();
+void loadFromFile();
+float calculateFare(int distance, char* class);
+bool checkSeatAvailability(int flightNum);</pre>
+            </div>
+
+            <h3>File Handling Example</h3>
+            <div class="code-example">
+<pre>void saveFlightData(Flight flights[], int count) {
+    ofstream file("flights.txt");
+    
+    for(int i = 0; i < count; i++) {
+        file << flights[i].flightNumber << " "
+             << flights[i].destination << " "
+             << flights[i].departureTime << " "
+             << flights[i].arrivalTime << " "
+             << flights[i].totalSeats << " "
+             << flights[i].availableSeats << " "
+             << flights[i].fare << " "
+             << flights[i].status << endl;
+    }
+    
+    file.close();
+}
+
+void loadFlightData(Flight flights[], int& count) {
+    ifstream file("flights.txt");
+    count = 0;
+    
+    while(file >> flights[count].flightNumber 
+               >> flights[count].destination
+               >> flights[count].departureTime
+               >> flights[count].arrivalTime
+               >> flights[count].totalSeats
+               >> flights[count].availableSeats
+               >> flights[count].fare
+               >> flights[count].status) {
+        count++;
+    }
+    
+    file.close();
+}</code>
+            </div>
+
+            <h3>Dynamic Memory Example</h3>
+            <div class="code-example">
+<pre>// Dynamic array for passengers
+int maxPassengers = 100;
+Passenger* passengers = new Passenger[maxPassengers];
+
+// Adding more passengers dynamically
+if(currentCount >= maxPassengers) {
+    maxPassengers *= 2;
+    Passenger* temp = new Passenger[maxPassengers];
+    
+    for(int i = 0; i < currentCount; i++) {
+        temp[i] = passengers[i];
+    }
+    
+    delete[] passengers;
+    passengers = temp;
+}
+
+// Don't forget to free memory
+delete[] passengers;</code>
+            </div>
+
+            <h3>Menu System Example</h3>
+            <div class="code-example">
+<pre>void passengerMenu(Passenger* p) {
+    int choice;
+    
+    do {
+        cout << "\n=== PASSENGER MENU ===" << endl;
+        cout << "1. View Available Flights" << endl;
+        cout << "2. Book a Flight" << endl;
+        cout << "3. Cancel Reservation" << endl;
+        cout << "4. View My Bookings" << endl;
+        cout << "5. Logout" << endl;
+        cout << "Enter choice: ";
+        cin >> choice;
+        
+        switch(choice) {
+            case 1:
+                viewAvailableFlights();
+                break;
+            case 2:
+                bookFlight(p);
+                break;
+            case 3:
+                cancelReservation(p);
+                break;
+            case 4:
+                generatePassengerReport(p->id);
+                break;
+            case 5:
+                cout << "Logging out..." << endl;
+                break;
+            default:
+                cout << "Invalid choice!" << endl;
+        }
+    } while(choice != 5);
+}</code>
+            </div>
+        </div>
+
+        <footer>
+            <p>💡 <strong>Pro Tip:</strong> Start with basic functionality and gradually add features. Test each component thoroughly before moving to the next!</p>
+            <p style="margin-top: 10px;">Good luck with your project! ✈️🚀</p>
+        </footer>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(tabId).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
