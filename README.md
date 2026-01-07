@@ -42,4 +42,4 @@ The main objective of this project is to strengthen problem-solving skills, logi
 | **Muhammad Muaaz Ali** | 2025-CS-708 | Team Leader |
 | **Maham Shahzadi** | 2025-CS-693 | Assistant Team Leader |
 | **Aimal Awais** | 2025-CS-676 | Member |
-| **Moazam Ali** | 2025-CS-696 | jan ka tota |
+| **Moazam Ali** | 2025-CS-696 | Member |
